@@ -4,12 +4,15 @@ version = "0.1.0"
 description = "Simple Python Graph Library"
 authors = []
 
-[tool.poetry.dependencies]
-python = "^3.10"
 
-[tool.poetry.dev-dependencies]
+[tool.poetry.dependencies]
+python = "^3.8"  
+
+
+[tool.poetry.group.dev.dependencies]
 pytest = "^6.2"
 pytest-cov = "^3.0.0"
-black = "*"
-pre-commit = "*"
-pdoc3 = "0.10.0"
+black = "^24.0"  
+pre-commit = "^3.3.3"
+pdoc3 = "0.10.0"  
+pdoc = "<15"

@@ -1,0 +1,42 @@
+name: Python CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: 检出代码
+      uses: actions/checkout@v3
+
+    - name: 设置 Python 3.8
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.8'
+
+    - name: 安装 Poetry
+      run: |
+        pip install poetry
+
+    - name: 安装依赖
+      run: |
+        poetry install
+
+    - name: 代码格式检查（black）
+      run: |
+        poetry run black --check .
+
+    - name: 运行测试
+      env:
+        PYTHONPATH: .
+      run: |
+        poetry run pytest --cov=pygraph
+
+    - name: 生成 API 文档
+      run: |
+        poetry run pdoc --html pygraph -o html
